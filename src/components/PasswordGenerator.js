@@ -4,6 +4,7 @@ import PasswordDisplay from './PasswordDisplay';
 import PreviousPassword from './PreviousPassword';
 
 const PasswordGenerator = () => { 
+   
   const [password, setPassword] = useState('');
   const [history, setHistory] = useState([]);
   const [includeNumbers, setIncludeNumbers] = useState(true);
@@ -34,11 +35,13 @@ const PasswordGenerator = () => {
   };
 
   const updateHistory = (newPassword) => {
+
     const updatedHistory = [newPassword, ...history.slice(0, 4)];
     setHistory(updatedHistory);
     localStorage.setItem('previousPassword', JSON.stringify(updatedHistory));
   };
-
+ 
+   const refersh={}
   return (
     <Container className="mt-5">
       <h1 className="mb-4">Password Generator</h1>
@@ -67,7 +70,7 @@ const PasswordGenerator = () => {
           Generate Password
         </Button>
       </Form>
-      <PasswordDisplay password={password} />
+      <PasswordDisplay  password={password} refersh={refersh} />
       <PreviousPassword history={history} />
     </Container>
   );

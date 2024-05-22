@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button,Form } from 'react-bootstrap';
 
 
-const PasswordDisplay = ({ password }) => {
-  
+const PasswordDisplay = ({ password,refersh }) => {
+  console.log("/////////");
   const [copy,setCopy]=useState(false)
+  useEffect(()=>{
+   if(copy==true){
+      setCopy(!copy)
+   }
+  },[refersh])
   const copyToClipboard = () => {
    setCopy(!copy)
     navigator.clipboard.writeText(password);
   };
+
+  console.log(copy,"-----------------");
   return (
     <>    
    <h1> {copy} </h1> 
