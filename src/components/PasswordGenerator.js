@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
 import PasswordDisplay from './PasswordDisplay';
 import PreviousPassword from './PreviousPassword';
 
@@ -10,32 +10,37 @@ const PasswordGenerator = () => {
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeLetters, setIncludeLetters] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
-
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem('previousPassword')) || [];
     setHistory(storedHistory);
   }, []);
+  
 
-  const generatePassword = () => {
-    const numbers = '0123456789';
-    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
-    let characters = '';
-    if (includeNumbers) characters += numbers;
-    if (includeLetters) characters += letters;
-    if (includeSymbols) characters += symbols;
-
-    let newPassword = '';
-      for (let i = 0; i < 8; i++) {
-
-      newPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+   const generatePassword = () => {
+      const numbers = '0123456789';
+      const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+      let characters = '';
+      if (includeNumbers) characters += numbers;
+      if (includeLetters) characters += letters;
+      if (includeSymbols) characters += symbols;
+  
+      let newPassword = '';
+        for (let i = 0; i < 8; i++) {
+  
+        newPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      if(includeNumbers || includeLetters || includeSymbols){
+      setPassword(newPassword);
+      updateHistory(newPassword);
+   }else{
+      console.log("else");
+      alert("Select the type of Password")
     }
-    setPassword(newPassword);
-    updateHistory(newPassword);
-  };
+    };
+
 
   const updateHistory = (newPassword) => {
-
     const updatedHistory = [newPassword, ...history.slice(0, 4)];
     setHistory(updatedHistory);
     localStorage.setItem('previousPassword', JSON.stringify(updatedHistory));

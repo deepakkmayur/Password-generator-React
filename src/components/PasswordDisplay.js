@@ -3,7 +3,7 @@ import { Alert, Button,Form } from 'react-bootstrap';
 
 
 const PasswordDisplay = ({ password,refersh }) => {
-  console.log("/////////");
+//   console.log("/////////");
   const [copy,setCopy]=useState(false)
   useEffect(()=>{
    if(copy==true){
@@ -15,10 +15,10 @@ const PasswordDisplay = ({ password,refersh }) => {
     navigator.clipboard.writeText(password);
   };
 
-  console.log(copy,"-----------------");
+//   console.log(copy,"-----------------");
   return (
     <>    
-   <h1> {copy} </h1> 
+   {/* <h1> {copy} </h1>  */}
           <div style={{display:"flex"}} className="list-group-item">
           <input type="text" value={password} style={{backgroundColor:"white",borderRadius:"5px", width:"100%"}} />
           {copy? <Button variant="outline-success" onClick={copyToClipboard}>
