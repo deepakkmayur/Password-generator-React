@@ -1,0 +1,15 @@
+*{
+  background-color: aquamarine;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.App {
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+
